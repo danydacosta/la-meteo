@@ -1,7 +1,20 @@
 class Program{
-    constructor(city, map){
-        this.city = city
+    constructor(map){
+        this.Locate()
         this.map = map
+    }
+
+    Locate(){
+        let that = this;
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+               that.city = new City(position.coords.longitude, position.coords.latitude)
+            });
+
+            console.log(this);
+        } else {
+        /* geolocation IS NOT available */
+        }
     }
 
     ShowMap(){
@@ -22,13 +35,14 @@ class Program{
 }
 
 class City{
-    constructor(longitude, latitude, name){
+    constructor(longitude, latitude){
         this.longitude = longitude
         this.latitude = latitude
-        this.name = name
     }
-
+    
     FetchMeteo(){
-
+        
     }
 }
+
+let p = new Program(null)
