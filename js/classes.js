@@ -9,19 +9,26 @@ class Program{
         let that = this;
 
         if (!navigator.geolocation){
-            $('.locate').text("La géolocalisation n'est pas supportée par votre navigateur");
+            $('.location').text("La géolocalisation n'est pas supportée par votre navigateur");
             return;
         }
 
-        /*if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-               that.city = new City(position.coords.longitude, position.coords.latitude)
+        function success(position) {
+            var latitude  = position.coords.latitude;
+            var longitude = position.coords.longitude;
+        
+            var url = 'maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=';
+            that.Request(url, function(response) {
+                $('.location').text(response.results[2].address_components[0].long_name);
             });
+        }
 
-            console.log(this);
-        } else {*/
-        /* geolocation IS NOT available */
-        //}
+        function error() {
+            $('.location').text("Impossible de retrouver votre localisation.");
+        }
+
+        $('.location').text("Localisation en cours...");
+        navigator.geolocation.getCurrentPosition(success, error);
     }
 
     ShowMap(){
@@ -38,6 +45,21 @@ class Program{
 
     ClosePopup(){
 
+    }
+
+    Request(url, callback, type = 'GET', baseUrl = `https://maps.googleapis.com/`){
+        $.ajax({
+            url: baseUrl + url.split('?')[0],
+            type: type,
+            data: url.split('?')[1],
+            success: data => {
+                callback(data);
+            },
+            error: function(xhr, status, error) {
+                //Affichage du message d'erreur
+                console.log(xhr.status);
+            }
+        });
     }
 }
 
