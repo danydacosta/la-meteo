@@ -1,10 +1,10 @@
 /* FRONTEND */
-
 //Page chargée
 $(document).ready(function() {
-    let p = new Program(null)
-
-    $('.location').hover(function() {
-        console.log('hover');
-    })
+    let program = new Program(null)
+    
+    //Active les tooltips
+    $('body').tooltip({
+        selector: '.location'
+    });
 });
