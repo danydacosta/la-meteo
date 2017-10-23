@@ -7,15 +7,21 @@ class Program{
 
     Locate(){
         let that = this;
-        if ("geolocation" in navigator) {
+
+        if (!navigator.geolocation){
+            $('.locate').text("La géolocalisation n'est pas supportée par votre navigateur");
+            return;
+        }
+
+        /*if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(function(position) {
                that.city = new City(position.coords.longitude, position.coords.latitude)
             });
 
             console.log(this);
-        } else {
+        } else {*/
         /* geolocation IS NOT available */
-        }
+        //}
     }
 
     ShowMap(){
