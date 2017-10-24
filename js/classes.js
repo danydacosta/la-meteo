@@ -82,8 +82,12 @@ Pression : ${response.current_condition.pressure} hPa`
 
 class WeatherMap extends google.maps.Map{
     Click(data){
-        console.log(data.latLng.lat());
-        
+        let infowindow = new google.maps.InfoWindow({
+            content: 'YOP',
+            position: {lat: data.latLng.lat(), lng: data.latLng.lng()}
+        });
+
+        infowindow.open(this);
     }
 }
 

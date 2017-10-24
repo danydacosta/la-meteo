@@ -18,7 +18,7 @@ $(document).ready(function() {
         });
 
         //Clique sur la map
-        google.maps.event.addListener(map, 'mousedown', function(data){
+        google.maps.event.addListener(map, 'click', function(data){
             map.Click(data);
         });
 
