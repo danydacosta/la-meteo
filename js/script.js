@@ -17,6 +17,6 @@ $(document).ready(function() {
             center: myLatlng
         });
 
-
+        program.ShowMap();
     });
 });

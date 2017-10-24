@@ -37,7 +37,7 @@ class Program{
     }
 
     ShowMap(){
-
+        $('.map-wrapper').css('display', 'block');
     }
 
     CloseMap(){
