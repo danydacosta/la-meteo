@@ -7,4 +7,16 @@ $(document).ready(function() {
     $('body').tooltip({
         selector: '.location'
     });
+
+    //Clique sur le lieu
+    $('.location').click(function() {
+        var myLatlng = {lat: program.city.latitude, lng: program.city.longitude}
+
+        var map = new WeatherMap(document.getElementById('map'), {
+            zoom: 4,
+            center: myLatlng
+        });
+
+        
+    });
 });

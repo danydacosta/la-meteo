@@ -63,7 +63,7 @@ class City{
         let that = this
         Request(`services/json/lat=${this.latitude}lng=${this.longitude}`, function(response){
             //Contenu de la tooltip
-            let weather = `Météo de ${that.name} du ${response.fcst_day_0.day_long} ${response.current_condition.date} à ${response.current_condition.hour}
+            that.tooltipWeather = `Météo de ${that.name} du ${response.fcst_day_0.day_long} ${response.current_condition.date} à ${response.current_condition.hour}
 
 Température : ${response.current_condition.tmp}°C [min.${response.fcst_day_0.tmin}°C, max.${response.fcst_day_0.tmax}°C]
 Condition : ${response.current_condition.condition}
@@ -72,9 +72,13 @@ Vitesse du vent : ${response.current_condition.wnd_spd} km/h
 Vitesse du vent en rafale : ${response.current_condition.wnd_gust} km/h
 Pression : ${response.current_condition.pressure} hPa`
 
-            $('.location').attr("title", weather).tooltip('fixTitle').tooltip('show');                                          //A mettre dans le "script.js"
+            $('.location').attr("title", that.tooltipWeather).tooltip('fixTitle').tooltip('show');                                          //A mettre dans le "script.js"
         }, 'GET', 'http://prevision-meteo.ch/');
     }
+}
+
+class WeatherMap extends google.maps.Map{
+
 }
 
 function Request(url, callback, type = 'GET', baseUrl = `https://maps.googleapis.com/`){
@@ -91,3 +95,31 @@ function Request(url, callback, type = 'GET', baseUrl = `https://maps.googleapis
         }
     });
 }
+
+/*function initMap() {
+    var myLatlng = {lat: -25.363, lng: 131.044};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: myLatlng
+    });
+
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Click to zoom'
+    });
+
+    map.addListener('center_changed', function() {
+      // 3 seconds after the center of the map has changed, pan back to the
+      // marker.
+      window.setTimeout(function() {
+        map.panTo(marker.getPosition());
+      }, 3000);
+    });
+
+    marker.addListener('click', function() {
+      map.setZoom(8);
+      map.setCenter(marker.getPosition());
+    });
+  }*/
