@@ -17,6 +17,12 @@ $(document).ready(function() {
             center: myLatlng
         });
 
+        //Clique sur la map
+        google.maps.event.addListener(map, 'click', function(data){
+            console.log(data);
+        });
+
         program.ShowMap();
     });
+
 });
