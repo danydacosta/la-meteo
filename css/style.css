@@ -13,7 +13,7 @@ body{
 
 .meteo-icon {
     margin: auto;
-    margin-top: 30%;
+    margin-top: 15%;
     max-width: 125px;
     max-height: 125px;
 }
@@ -31,10 +31,18 @@ body{
     text-align: left;
 }
 
+.map-wrapper{
+    display: none;
+    position: absolute;
+    width: 34%;
+    top: 34%;
+    left: 0%;
+    right: 0%;
+}
+
 .weather-map {
     min-width: 200px;
-    width: 50%;
+    width: 290%;
     min-height: 200px;
-    height: 80%;
-    border: 1px solid blue;
+    height: 511px;
 }
