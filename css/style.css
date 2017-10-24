@@ -21,3 +21,10 @@ body{
     color: white;
     text-decoration: underline;
 }
+
+.tooltip-inner {
+    white-space:pre-wrap;
+    max-width: 350px;
+    width: 350px;
+    text-align: left;
+}
