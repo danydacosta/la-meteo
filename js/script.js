@@ -1,7 +1,8 @@
 /* FRONTEND */
 //Page chargée
 $(document).ready(function() {
-    let program = new Program(null)
+    const program = new Program(null)
+    program.Locate()
     
     //Active les tooltips
     $('body').tooltip({

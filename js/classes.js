@@ -1,7 +1,6 @@
 /* BACKEND */
 class Program{
     constructor(map){
-        this.Locate()
         this.map = map
     }
 
@@ -73,18 +72,31 @@ Vitesse du vent en rafale : ${response.current_condition.wnd_gust} km/h
 Pression : ${response.current_condition.pressure} hPa`
 
             //Icon
-            $('.meteo-icon').attr("src", response.current_condition.icon_big);
+            $('.meteo-icon').attr("src", response.current_condition.icon_big);                                                              //A mettre dans le "script.js"
 
             $('.location').attr("title", that.tooltipWeather).tooltip('fixTitle').tooltip('show');                                          //A mettre dans le "script.js"
         }, 'GET', 'http://prevision-meteo.ch/');
+    }
+
+    FetchInfoWindowWeather(callback){
+        Request(`services/json/lat=${this.latitude}lng=${this.longitude}`, function(response){
+
+        });
     }
 }
 
 class WeatherMap extends google.maps.Map{
     Click(data){
+        let clickedCity = new City(data.latLng.lng(), data.latLng.lat());
+
+        let infoWindowContent;
+        clickedCity.FetchInfoWindowWeather(function(response){
+            infoWindowContent = response;
+        });
+
         let infowindow = new google.maps.InfoWindow({
-            content: 'YOP',
-            position: {lat: data.latLng.lat(), lng: data.latLng.lng()}
+            content: infoWindowContent,
+            position: {lat: clickedCity.latitude, lng: clickedCity.longitude}
         });
 
         infowindow.open(this);
