@@ -13,10 +13,10 @@ $(document).ready(function() {
         var myLatlng = {lat: program.city.latitude, lng: program.city.longitude}
 
         var map = new WeatherMap(document.getElementById('map'), {
-            zoom: 4,
+            zoom: 8,
             center: myLatlng
         });
 
-        
+
     });
 });

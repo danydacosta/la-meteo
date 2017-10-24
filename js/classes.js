@@ -72,6 +72,9 @@ Vitesse du vent : ${response.current_condition.wnd_spd} km/h
 Vitesse du vent en rafale : ${response.current_condition.wnd_gust} km/h
 Pression : ${response.current_condition.pressure} hPa`
 
+            //Icon
+            $('.meteo-icon').attr("src", response.current_condition.icon_big);
+
             $('.location').attr("title", that.tooltipWeather).tooltip('fixTitle').tooltip('show');                                          //A mettre dans le "script.js"
         }, 'GET', 'http://prevision-meteo.ch/');
     }
