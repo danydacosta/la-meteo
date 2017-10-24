@@ -18,8 +18,8 @@ $(document).ready(function() {
         });
 
         //Clique sur la map
-        google.maps.event.addListener(map, 'click', function(data){
-            console.log(data);
+        google.maps.event.addListener(map, 'mousedown', function(data){
+            map.Click(data);
         });
 
         program.ShowMap();
