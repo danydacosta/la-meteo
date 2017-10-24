@@ -21,7 +21,9 @@ class Program{
                 let name = response.results[2].address_components[0].long_name;
                 //Affiche le nom de la ville
                 $('.location').text(name);                                                                                              //A mettre dans le "script.js"
+                //Set le nom de la ville
                 that.city.name = name;
+                //Une fois le tout chargé, on fetch la météo s'affichant dans la tooltip
                 that.city.FetchTooltipWeather();
             });
         }
@@ -60,7 +62,17 @@ class City{
     FetchTooltipWeather(){
         let that = this
         Request(`services/json/lat=${this.latitude}lng=${this.longitude}`, function(response){
-            $('.location').attr("title", `Météo de ${that.name} du ${response.fcst_day_0.day_long}`).tooltip('fixTitle').tooltip('show');   //A mettre dans le "script.js"
+            //Contenu de la tooltip
+            let weather = `Météo de ${that.name} du ${response.fcst_day_0.day_long} ${response.current_condition.date} à ${response.current_condition.hour}
+
+Température : ${response.current_condition.tmp}°C [min.${response.fcst_day_0.tmin}°C, max.${response.fcst_day_0.tmax}°C]
+Condition : ${response.current_condition.condition}
+Humidité : ${response.current_condition.humidity}%
+Vitesse du vent : ${response.current_condition.wnd_spd} km/h
+Vitesse du vent en rafale : ${response.current_condition.wnd_gust} km/h
+Pression : ${response.current_condition.pressure} hPa`
+
+            $('.location').attr("title", weather).tooltip('fixTitle').tooltip('show');                                          //A mettre dans le "script.js"
         }, 'GET', 'http://prevision-meteo.ch/');
     }
 }
